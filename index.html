@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Happy Birthday Shinchu 💜</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+font-family:Segoe UI,sans-serif;
+background:linear-gradient(135deg,#1a082f,#4c1d95,#7c3aed);
+color:#fff;overflow-x:hidden;scroll-behavior:smooth;
+}
+canvas{position:fixed;inset:0;pointer-events:none}
+.hero{text-align:center;padding:70px 20px}
+h1{font-size:3.2rem;text-shadow:0 0 25px #d8b4fe}
+.glass{
+width:min(95%,1100px);
+margin:20px auto;
+padding:25px;
+background:rgba(255,255,255,.12);
+backdrop-filter:blur(15px);
+border-radius:25px;
+box-shadow:0 0 35px rgba(216,180,254,.25);
+}
+.typewriter{
+overflow:hidden;white-space:nowrap;border-right:3px solid #fff;
+display:inline-block;animation:typing 5s steps(40,end),blink .8s infinite;
+}
+@keyframes typing{from{width:0}to{width:100%}}
+@keyframes blink{50%{border-color:transparent}}
+.gallery{position:relative;height:420px;overflow:hidden;border-radius:20px}
+.gallery img{
+position:absolute;width:100%;height:100%;object-fit:cover;
+opacity:0;animation:slide 24s infinite;
+}
+.gallery img:nth-child(1){animation-delay:0s}
+.gallery img:nth-child(2){animation-delay:4s}
+.gallery img:nth-child(3){animation-delay:8s}
+.gallery img:nth-child(4){animation-delay:12s}
+.gallery img:nth-child(5){animation-delay:16s}
+.gallery img:nth-child(6){animation-delay:20s}
+@keyframes slide{0%,15%{opacity:1}20%,100%{opacity:0}}
+.btn{
+padding:12px 25px;border:none;border-radius:30px;
+background:#9333ea;color:white;cursor:pointer;font-size:1rem;
+}
+#letter,#gift{display:none;margin-top:15px;line-height:1.8}
+.count{text-align:center;font-size:1.4rem}
+.cake{text-align:center;font-size:6rem}
+.timeline div{padding:10px;border-left:3px solid #d8b4fe;margin:10px 0}
+.float{position:fixed;top:-50px;animation:fall linear infinite}
+@keyframes fall{to{transform:translateY(120vh)}}
+</style>
+</head>
+<body>
+<canvas id="fw"></canvas>
+
+<section class="hero">
+<h1>Happy Birthday Shinchu 💜</h1>
+<h2 class="typewriter">You are my favorite person, my happiness, my everything ❤️</h2>
+</section>
+
+<div class="glass count">
+⏳ Countdown To Your Special Day: <span id="count"></span>
+</div>
+
+<div class="glass" style="text-align:center">
+<button class="btn" onclick="music()">🎵 Music Button</button>
+<p>(Add your song link/file later)</p>
+</div>
+
+<div class="glass">
+<h2>📸 Our Beautiful Memories</h2><br>
+<div class="gallery">
+<img src="photo1.jpg">
+<img src="photo2.jpg">
+<img src="photo3.jpg">
+<img src="photo4.jpg">
+<img src="photo5.jpg">
+<img src="photo6.jpg">
+</div>
+</div>
+
+<div class="glass">
+<h2>💖 Our Journey</h2>
+<div class="timeline">
+<div>❤️ The Day We Met</div>
+<div>🌹 First Special Memory</div>
+<div>✨ Countless Laughs Together</div>
+<div>💜 Today: Celebrating Shinchu</div>
+</div>
+</div>
+
+<div class="glass" style="text-align:center">
+<h2>💌 Love Letter</h2><br>
+<button class="btn" onclick="letter()">Open Letter</button>
+<div id="letter">
+Happy Birthday Shinchu ❤️<br><br>
+Thank you for filling my life with happiness, warmth and love.
+Your smile lights up my world and every moment with you feels magical.
+May this birthday bring you endless joy, success and beautiful memories.
+I am grateful for every second spent with you. 💜
+</div>
+</div>
+
+<div class="glass">
+<div class="cake">🎂</div>
+<h2 style="text-align:center">Make A Wish ✨</h2>
+</div>
+
+<div class="glass" style="text-align:center">
+<h2>🎁 Surprise Gift</h2><br>
+<button class="btn" onclick="gift()">Open Gift</button>
+<div id="gift">💎 The greatest gift I have is YOU, Shinchu 💜</div>
+</div>
+
+<script>
+function letter(){
+let x=document.getElementById('letter');
+x.style.display=x.style.display==='block'?'none':'block';
+}
+function gift(){
+document.getElementById('gift').style.display='block';
+}
+function music(){alert('Replace this with your favorite song file ❤️');}
+
+const target=new Date(new Date().getFullYear(),11,31);
+setInterval(()=>{
+let d=target-new Date();
+let days=Math.floor(d/86400000);
+document.getElementById('count').innerHTML=days+' days';
+},1000);
+
+for(let i=0;i<60;i++){
+let e=document.createElement('div');
+e.className='float';
+e.innerHTML=Math.random()>.5?'💜':'✨';
+e.style.left=Math.random()*100+'vw';
+e.style.animationDuration=(5+Math.random()*10)+'s';
+document.body.appendChild(e);
+}
+
+const c=document.getElementById('fw'),ctx=c.getContext('2d');
+function resize(){c.width=innerWidth;c.height=innerHeight}resize();onresize=resize;
+let p=[];
+setInterval(()=>{
+for(let i=0;i<25;i++)p.push({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5)*4,vy:(Math.random()-.5)*4,l:60});
+},1200);
+function draw(){
+ctx.clearRect(0,0,c.width,c.height);
+p.forEach((a,i)=>{
+ctx.fillStyle='rgba(216,180,254,'+(a.l/60)+')';
+ctx.beginPath();ctx.arc(a.x,a.y,3,0,6.28);ctx.fill();
+a.x+=a.vx;a.y+=a.vy;a.l--;
+if(a.l<1)p.splice(i,1);
+});
+requestAnimationFrame(draw);
+}
+draw();
+</script>
+</body>
+</html>
